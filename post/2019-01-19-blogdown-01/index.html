@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="google-site-verification" content="9vIieCe-Qpd78QOmBl63rGtIVbhY6sYyuxX3j8XWBA4" />
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+    
+    <meta name="keyword"  content="GuoXiao, Blog, 博客, 个人网站, R, R Markdown">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>给R用户的个人网站搭建教程-GuoXiao&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2019-01-19-blogdown-01/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">GuoXiao&#39;s Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E6%8A%80">技</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E6%9C%AF">术</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E9%81%93">道</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/about/">关于</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-sun-people.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/r-markdown" title="R Markdown">
+                            R Markdown
+                        </a>
+                        
+                        <a class="tag" href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                    </div>
+                    <h1>给R用户的个人网站搭建教程</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Xiao
+			 
+			on 
+			Sunday, January 20, 2019
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+                
+
+
+<div id="r" class="section level2">
+<h2>R用户的需求与网站架构选择</h2>
+<p>数据分析的编程语言主要有R和Python两大阵营。现阶段，Python已占了优势，且在国内，Python是绝对主流。虽然两种语言我都使用，但很不幸的是，我用R还是更多一些，所以我主要还是R用户。</p>
+<p>对R用户来说，数据分析报告的撰写是基本功之一。而可重复性分析报告（Reproducible reports）则是数据分析报告形式的最佳选择。可重复性分析报告是这样一种形式：它将说明文字、数据、代码、计算结果、可视化图表等结合在一起，其中的计算结果与可视化图表由对应的代码自动生成，而不是先在其他环境中运行代码、保存结果、再将结果复制粘贴到报告中。可重复性分析报告相比于传统的分析报告，至少包含3点优势：</p>
+<ul>
+<li>代码与说明文字有机结合，使得代码更加易读，而说明文字更有说服力。它与在程序中直接写注释的区别在于，文字是富文本格式，可以有非常美观的排版，且还可以包含图表及更丰富的展示形式（如互动式图表、仪表盘等，可参看https://rmarkdown.rstudio.com/gallery.html）。</li>
+<li>结果是直接通过代码生成的，因而任何数据、方法的改动会直接导致结果的变化，而无需担心忘记更新结果。</li>
+<li>任何阅读报告的人，可通过报告中的代码，复现报告中的结果，因而报告是可重复，因而是可信的。只要数据源不作假，在整个分析过程与结果中，没有任何造假的空间。想通过PS对结果图进行修改，或者伪造、篡改中间数据来造假都是不可能的。</li>
+</ul>
+<p>下图是一个可重复性报告示例。</p>
+<div class="figure">
+<img src="report.png" alt="可重复性报告示例" />
+<p class="caption">可重复性报告示例</p>
+</div>
+<p>对Python用户来说，写可重复性分析报告的最常用工具是 Jupyter笔记本。而R用户则用<a href="https://rmarkdown.rstudio.com/">R Markdown</a>。</p>
+<p>如何快速将R Markdown撰写的可重复性分析报告部署到个人网站中，是R用户搭建个人网站时必然需要思考的问题。CSDN等博客站、微信公众号、知乎、简书等平台都无法满足这个需求。谢益辉开发的<a href="https://bookdown.org/yihui/blogdown/">blogdown</a>工具和<a href="https://gohugo.io/">HUGO</a>相结合则解决了这个问题。本网站就采用的是这种架构。</p>
+</div>
+<div class="section level2">
+<h2>网站部署选择</h2>
+<p>本网站的部署选择的是<a href="https://pages.github.com/">GitHub Pages</a>，主要是出于以下几点考虑：</p>
+<ul>
+<li>访问的便利性：无需翻墙，国内外的网友都可以轻松访问，对电脑端和移动端的访问也都比较友好，一般不会被微信屏蔽。</li>
+<li>部署的便利性：传统的网站部署一般包含以下几个步骤：
+<ol style="list-style-type: decimal">
+<li>（云）服务器购买</li>
+<li>服务器环境配置</li>
+<li>域名购买</li>
+<li>域名解析</li>
+<li>域名备案</li>
+<li>网站搭建</li>
+</ol>
+在GitHub Pages上部署，则至少省去了1、2、5这几个步骤。如果采用GitHub默认域名，则3、4也不需要，将6步化简为1步。</li>
+<li>免费。</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>基本流程</h2>
+<p>这一部分主要参考了谢益辉的<a href="https://bookdown.org/yihui/blogdown/">blogdown: Creating Websites with R Markdown</a>一书，以及<a href="https://pages.github.com/">GitHub Pages</a>的部署说明。</p>
+<div class="section level3">
+<h3>准备工作</h3>
+<p>这里假设读者已经是R用户了，应而已经安装了R和RStudio，已经熟悉了R语法、R Markdown 语法。如果读者还不具备这些能力，可参考<a href="https://www.rstudio.com/online-learning/">RStudio官网上的建议</a>进行学习。本网站今后也会逐步发布相关教程。</p>
+<p>除了R语言方面的准备，你还需要拥有一个<a href="https://github.com/">GitHub</a>账号，如果未注册，请先注册一个账号。</p>
+</div>
+<div class="section level3">
+<h3>生成网站文件</h3>
+<div id="blogdownhugo" class="section level4">
+<h4>安装blogdown包和Hugo</h4>
+<p>在RStudio的Console中输入<code>install.packages(&quot;blogdown&quot;)</code>来安装blogdown包。</p>
+<p>输入<code>blogdown::install_hugo()</code>安装Hugo。</p>
+</div>
+<div class="section level4">
+<h4>选择网站主题</h4>
+<p>blogdown会提供一个默认的网站主题（外观风格），见 <a href="https://themes.gohugo.io/hugo-lithium-theme/" class="uri">https://themes.gohugo.io/hugo-lithium-theme/</a> 。如果你不喜欢默认的主题，你可以选择其他主题（如果喜欢，跳过这一部分）。主题库可在 <a href="https://themes.gohugo.io" class="uri">https://themes.gohugo.io</a> 中查找，我选择的是<a href="https://themes.gohugo.io/hugo-theme-cleanwhite/">Clean White</a></p>
+<p>选好主题之后，点击Hugo页面中介绍该主题的Homepage按钮，会跳转到该主题的GitHub页面，比如我选的主题会跳到 <a href="https://github.com/zhaohuabing/hugo-theme-cleanwhite" class="uri">https://github.com/zhaohuabing/hugo-theme-cleanwhite</a> ，记录该网址最后两部分——用户名和项目名，如<code>zhaohuabing/hugo-theme-cleanwhite</code>，会在下一步有用。</p>
+</div>
+<div class="section level4">
+<h4>生成网站模板</h4>
+<p>在RStudio中，新建一个普通的项目（依次点击File | New Project | New Directory | New Project，在Directory name 中输入网站文件夹名，比如我用MyWebsite01，最好只有英文和数字，点击Browse，选择网站文件夹存放的路径，比如我选择D:/personal，最后点击Create Project。）</p>
+<p>在Console中输入<code>blogdown::new_site(theme = 'user/repo')</code>。将其中的<code>user/repo</code>换成上一部分让你记录的用户名和项目名，对我来说就是<code>zhaohuabing/hugo-theme-cleanwhite</code>，如果你选择默认主题，则去掉new_site括号中的所有内容。</p>
+<p>等待一会，本地的网站模板便可生成，在RStudio的Viewer中会显示出网站，点击小箭头图标可在浏览器中打开。</p>
+<p>此时，你将在项目工作路径（对我来说就是D:/personal/MyWebsite01/）中看到以下内容（以点开头的文件夹可能会隐藏，末尾加星号的表示对某些主题存在，某些主题不存在）。</p>
+<pre class="markdown"><code>|
+|_.Rproj.user
+|_content/
+|_public
+|_static/
+|_themes/
+|_build_algolia_index.sh*
+|_config.toml
+|_deploy.sh*
+|_index.Rmd
+|_MyWebsite01.Rproj
+</code></pre>
+<p>content/文件夹中的内容是我们博客的主体，我们今后增加博客，便是在此新建md文件或Rmd文件，该文件夹下的结构是任意的。static/ 文件夹下包含图片、CSS文件等静态资产文件，所有static/ 文件夹下的内容都会被复制到public/ 文件夹下。public/文件夹中的内容便是要部署到GitHub Pages中的文件。</p>
+</div>
+<div class="section level4">
+<h4>将网站模板修改为自己需要的内容</h4>
+<p>由于选取的网站主题不同，下面的操作需要根据不同的主题而有所调整。</p>
+<p>你会在content/post/文件夹下看到一些md文件，每篇博文对应1个md文件。打开一个md文件，其中内容分为两部分，上半部分上下用三个减号包围，称为YAML块，它起到设置的作用。下半部分是Markdown文本，作为博文的内容。你将其中的内容换成你的博文内容，再根据情况做个性化设置，保存后就可以看到网站内容的变化了。</p>
+<p>你也可以用R Markdown （Rmd文件）代替md文件，YAML块可以保持不变，用R Markdown语法代替Markdown即可。二者差异不大，但Rmd文件中，可执行R代码，而不仅仅是作为文本展示出来。</p>
+<p>此外，你需要调整config.toml文件中的内容。不同的主题，config.toml中的内容可能差异非常大，具体如何调整，你需要查阅关于该主题的更多的资料。一般来说，该主题的GitHub项目中，会有README文件，其中会有部分相关内容。</p>
+</div>
+</div>
+<div id="github-pages" class="section level3">
+<h3>部署到GitHub Pages中</h3>
+<p>请参考<a href="https://pages.github.com/">GitHub Pages</a>官方说明。</p>
+</div>
+</div>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2019-01-19-dao-00/" data-toggle="tooltip" data-placement="top" title="栏目“道”的写作计划">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://www.jianshu.com/u/e233eb0783de">木石的简书</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:xiaoguo.nano@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; GuoXiao&#39;s Blog , 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

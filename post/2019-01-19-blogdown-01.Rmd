@@ -1,0 +1,116 @@
+---
+layout: post
+title: "给R用户的个人网站搭建教程"
+author: "Xiao"
+date: "`r Sys.Date()`"
+subtitle: ""
+description: ""
+excerpt: ""
+image: ""
+URL: ""
+showtoc: false
+categories: ["技"]
+tags:
+    - R Markdown
+    - R
+---
+
+## R用户的需求与网站架构选择
+
+数据分析的编程语言主要有R和Python两大阵营。现阶段，Python已占了优势，且在国内，Python是绝对主流。虽然两种语言我都使用，但很不幸的是，我用R还是更多一些，所以我主要还是R用户。
+
+对R用户来说，数据分析报告的撰写是基本功之一。而可重复性分析报告（Reproducible reports）则是数据分析报告形式的最佳选择。可重复性分析报告是这样一种形式：它将说明文字、数据、代码、计算结果、可视化图表等结合在一起，其中的计算结果与可视化图表由对应的代码自动生成，而不是先在其他环境中运行代码、保存结果、再将结果复制粘贴到报告中。可重复性分析报告相比于传统的分析报告，至少包含3点优势：
+
+- 代码与说明文字有机结合，使得代码更加易读，而说明文字更有说服力。它与在程序中直接写注释的区别在于，文字是富文本格式，可以有非常美观的排版，且还可以包含图表及更丰富的展示形式（如互动式图表、仪表盘等，可参看https://rmarkdown.rstudio.com/gallery.html）。
+- 结果是直接通过代码生成的，因而任何数据、方法的改动会直接导致结果的变化，而无需担心忘记更新结果。
+- 任何阅读报告的人，可通过报告中的代码，复现报告中的结果，因而报告是可重复，因而是可信的。只要数据源不作假，在整个分析过程与结果中，没有任何造假的空间。想通过PS对结果图进行修改，或者伪造、篡改中间数据来造假都是不可能的。
+
+下图是一个可重复性报告示例。
+
+![可重复性报告示例](report.png)
+
+对Python用户来说，写可重复性分析报告的最常用工具是 Jupyter笔记本。而R用户则用[R Markdown](https://rmarkdown.rstudio.com/)。
+
+如何快速将R Markdown撰写的可重复性分析报告部署到个人网站中，是R用户搭建个人网站时必然需要思考的问题。CSDN等博客站、微信公众号、知乎、简书等平台都无法满足这个需求。谢益辉开发的[blogdown](https://bookdown.org/yihui/blogdown/)工具和[HUGO](https://gohugo.io/)相结合则解决了这个问题。本网站就采用的是这种架构。
+
+## 网站部署选择
+
+本网站的部署选择的是[GitHub Pages](https://pages.github.com/)，主要是出于以下几点考虑：
+
+- 访问的便利性：无需翻墙，国内外的网友都可以轻松访问，对电脑端和移动端的访问也都比较友好，一般不会被微信屏蔽。
+- 部署的便利性：传统的网站部署一般包含以下几个步骤：
+  1. （云）服务器购买
+  2. 服务器环境配置
+  3. 域名购买
+  4. 域名解析
+  5. 域名备案
+  6. 网站搭建
+  
+  在GitHub Pages上部署，则至少省去了1、2、5这几个步骤。如果采用GitHub默认域名，则3、4也不需要，将6步化简为1步。
+- 免费。
+
+## 基本流程
+
+这一部分主要参考了谢益辉的[blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)一书，以及[GitHub Pages](https://pages.github.com/)的部署说明。
+
+### 准备工作
+
+这里假设读者已经是R用户了，应而已经安装了R和RStudio，已经熟悉了R语法、R Markdown 语法。如果读者还不具备这些能力，可参考[RStudio官网上的建议](https://www.rstudio.com/online-learning/)进行学习。本网站今后也会逐步发布相关教程。
+
+除了R语言方面的准备，你还需要拥有一个[GitHub](https://github.com/)账号，如果未注册，请先注册一个账号。
+
+### 生成网站文件
+
+#### 安装blogdown包和Hugo
+
+在RStudio的Console中输入`install.packages("blogdown")`来安装blogdown包。
+
+输入`blogdown::install_hugo()`安装Hugo。
+
+#### 选择网站主题
+
+blogdown会提供一个默认的网站主题（外观风格），见 https://themes.gohugo.io/hugo-lithium-theme/ 。如果你不喜欢默认的主题，你可以选择其他主题（如果喜欢，跳过这一部分）。主题库可在 https://themes.gohugo.io 中查找，我选择的是[Clean White](https://themes.gohugo.io/hugo-theme-cleanwhite/)
+
+选好主题之后，点击Hugo页面中介绍该主题的Homepage按钮，会跳转到该主题的GitHub页面，比如我选的主题会跳到 https://github.com/zhaohuabing/hugo-theme-cleanwhite ，记录该网址最后两部分——用户名和项目名，如`zhaohuabing/hugo-theme-cleanwhite`，会在下一步有用。
+
+#### 生成网站模板
+
+在RStudio中，新建一个普通的项目（依次点击File | New Project | New Directory | New Project，在Directory name 中输入网站文件夹名，比如我用MyWebsite01，最好只有英文和数字，点击Browse，选择网站文件夹存放的路径，比如我选择D:/personal，最后点击Create Project。）
+
+在Console中输入`blogdown::new_site(theme = 'user/repo')`。将其中的`user/repo`换成上一部分让你记录的用户名和项目名，对我来说就是`zhaohuabing/hugo-theme-cleanwhite`，如果你选择默认主题，则去掉new_site括号中的所有内容。
+
+等待一会，本地的网站模板便可生成，在RStudio的Viewer中会显示出网站，点击小箭头图标可在浏览器中打开。
+
+此时，你将在项目工作路径（对我来说就是D:/personal/MyWebsite01/）中看到以下内容（以点开头的文件夹可能会隐藏，末尾加星号的表示对某些主题存在，某些主题不存在）。
+
+```markdown
+|
+|_.Rproj.user
+|_content/
+|_public
+|_static/
+|_themes/
+|_build_algolia_index.sh*
+|_config.toml
+|_deploy.sh*
+|_index.Rmd
+|_MyWebsite01.Rproj
+
+```
+
+content/文件夹中的内容是我们博客的主体，我们今后增加博客，便是在此新建md文件或Rmd文件，该文件夹下的结构是任意的。static/ 文件夹下包含图片、CSS文件等静态资产文件，所有static/ 文件夹下的内容都会被复制到public/ 文件夹下。public/文件夹中的内容便是要部署到GitHub Pages中的文件。
+
+#### 将网站模板修改为自己需要的内容
+
+由于选取的网站主题不同，下面的操作需要根据不同的主题而有所调整。
+
+你会在content/post/文件夹下看到一些md文件，每篇博文对应1个md文件。打开一个md文件，其中内容分为两部分，上半部分上下用三个减号包围，称为YAML块，它起到设置的作用。下半部分是Markdown文本，作为博文的内容。你将其中的内容换成你的博文内容，再根据情况做个性化设置，保存后就可以看到网站内容的变化了。
+
+你也可以用R Markdown （Rmd文件）代替md文件，YAML块可以保持不变，用R Markdown语法代替Markdown即可。二者差异不大，但Rmd文件中，可执行R代码，而不仅仅是作为文本展示出来。
+
+此外，你需要调整config.toml文件中的内容。不同的主题，config.toml中的内容可能差异非常大，具体如何调整，你需要查阅关于该主题的更多的资料。一般来说，该主题的GitHub项目中，会有README文件，其中会有部分相关内容。
+  
+
+### 部署到GitHub Pages中
+
+请参考[GitHub Pages](https://pages.github.com/)官方说明。

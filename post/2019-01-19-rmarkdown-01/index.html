@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="google-site-verification" content="9vIieCe-Qpd78QOmBl63rGtIVbhY6sYyuxX3j8XWBA4" />
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+    
+    <meta name="keyword"  content="GuoXiao, Blog, 博客, 个人网站, R, R Markdown">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>R Markdown 学习指南与速查手册-GuoXiao&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2019-01-19-rmarkdown-01/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">GuoXiao&#39;s Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E6%8A%80">技</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E6%9C%AF">术</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E9%81%93">道</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/about/">关于</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-sun-people.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/r-markdown" title="R Markdown">
+                            R Markdown
+                        </a>
+                        
+                        <a class="tag" href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                    </div>
+                    <h1>R Markdown 学习指南与速查手册</h1>
+                    <h2 class="subheading">序言</h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Xiao
+			 
+			on 
+			Sunday, January 20, 2019
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+                
+
+
+<p>我编写此笔记本的工具就是R Markdown，具体来说，是其中的bookdown，因而我首先学习了R Markdown的用法。这里做些总结。</p>
+<div id="r-markdown" class="section level2">
+<h2>什么是R Markdown</h2>
+<p>略。</p>
+</div>
+<div id="r-markdown-" class="section level2">
+<h2>R Markdown 可以做什么？</h2>
+<p>比较常用的格式有：</p>
+<ul>
+<li>单篇文档
+<ul>
+<li>R 数据分析笔记本（<code>html_notebook</code>）</li>
+<li>HTML文档（<code>html_document</code>）</li>
+<li>PDF文档（<code>pdf_document</code>）</li>
+<li>word文档（<code>word_document</code>）</li>
+<li>仪表盘（<code>flexdashboard::flex_dashboard</code>）</li>
+</ul></li>
+<li>书（<code>bookdown</code>框架）
+<ul>
+<li>HTML版本
+<ul>
+<li><code>gitbook</code></li>
+<li><code>html_book</code></li>
+</ul></li>
+<li>pdf版本（<code>pdf_book</code>）</li>
+<li>epub版本（<code>epub_book</code>）</li>
+<li>格式和书一样丰富的单篇文档
+<ul>
+<li>HTML文档（<code>html_document2</code>）</li>
+<li>PDF文档（<code>pdf_document2</code>）</li>
+<li>word文档（<code>word_document2</code></li>
+</ul></li>
+</ul></li>
+<li>网站（<code>bolgdown</code>框架）
+<ul>
+<li>HTML版本（``）</li>
+</ul></li>
+</ul>
+<p>注意，在HTML、仪表盘中，都支持Shiny和交互式图（基于<code>Widgets</code>框架）。</p>
+</div>
+<div id="r-markdown" class="section level2">
+<h2>为什么用R Markdown</h2>
+<p>使用R Markdown的初衷在于，用它能方便地进行数据探索与分析。它能将R代码与文档有机地结合在一起，类似于Python用户常用的jupyter笔记本。这里所用的输出格式为<code>html_notebook</code>。</p>
+<p>当数据探索与分析完成后，我们也经常需要交付数据分析报告，此时<code>html_document</code>、<code>pdf_document</code>或<code>word_document</code>是一个好的选择，具体选择有赖于项目要求。</p>
+<p>由于以上两点原因，R Markdown已经成为了工作中常用的工具。而它也具备写书与写网站的功能，因而用它来写书和网站也成了备选选项之一。考虑到用其他工具的学习成本，以及我写的书（记笔记）与网站（发博客）与R数据分析的相关性，R Markdown依然能脱颖而出。</p>
+<p>就记笔记而言，可选R Markdown、word、有道笔记等。就发博客而言，可选基于R Markdown的个人网站，CSDN、简书等博客站，知乎、微信公众号等社交分发平台。但能将记笔记与发博客有机结合在一起，且方便数据分析中的互动图、仪表盘等的展示，R Markdown还是最好的选择。</p>
+</div>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2019-01-19-shu-00/" data-toggle="tooltip" data-placement="top" title="栏目“术”的写作计划">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/r-markdown" title="R Markdown">
+                            R Markdown
+                        </a>
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://www.jianshu.com/u/e233eb0783de">木石的简书</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:xiaoguo.nano@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; GuoXiao&#39;s Blog , 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

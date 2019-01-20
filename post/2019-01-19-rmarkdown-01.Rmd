@@ -1,0 +1,59 @@
+---
+layout: post
+title: "R Markdown 学习指南与速查手册"
+subtitle: "序言"
+author: "Xiao"
+date: "`r Sys.Date()`"
+description: ""
+excerpt: ""
+image: ""
+showonlyimage: true
+URL: ""
+showtoc: false
+published: true
+categories: ["技"]
+tags:
+    - R Markdown
+    - R
+---
+我编写此笔记本的工具就是R Markdown，具体来说，是其中的bookdown，因而我首先学习了R Markdown的用法。这里做些总结。
+
+## 什么是R Markdown
+
+略。
+
+## R Markdown 可以做什么？
+
+比较常用的格式有：
+
+- 单篇文档
+  - R 数据分析笔记本（`html_notebook`）
+  - HTML文档（`html_document`）
+  - PDF文档（`pdf_document`）
+  - word文档（`word_document`）
+  - 仪表盘（`flexdashboard::flex_dashboard`）
+- 书（`bookdown`框架）
+  - HTML版本
+    - `gitbook`
+    - `html_book`
+  - pdf版本（`pdf_book`）
+  - epub版本（`epub_book`）
+  - 格式和书一样丰富的单篇文档
+    - HTML文档（`html_document2`）
+    - PDF文档（`pdf_document2`）
+    - word文档（`word_document2`
+- 网站（`bolgdown`框架）
+  - HTML版本（``）
+
+注意，在HTML、仪表盘中，都支持Shiny和交互式图（基于`Widgets`框架）。
+
+
+## 为什么用R Markdown
+
+使用R Markdown的初衷在于，用它能方便地进行数据探索与分析。它能将R代码与文档有机地结合在一起，类似于Python用户常用的jupyter笔记本。这里所用的输出格式为`html_notebook`。
+
+当数据探索与分析完成后，我们也经常需要交付数据分析报告，此时`html_document`、`pdf_document`或`word_document`是一个好的选择，具体选择有赖于项目要求。
+
+由于以上两点原因，R Markdown已经成为了工作中常用的工具。而它也具备写书与写网站的功能，因而用它来写书和网站也成了备选选项之一。考虑到用其他工具的学习成本，以及我写的书（记笔记）与网站（发博客）与R数据分析的相关性，R Markdown依然能脱颖而出。
+
+就记笔记而言，可选R Markdown、word、有道笔记等。就发博客而言，可选基于R Markdown的个人网站，CSDN、简书等博客站，知乎、微信公众号等社交分发平台。但能将记笔记与发博客有机结合在一起，且方便数据分析中的互动图、仪表盘等的展示，R Markdown还是最好的选择。

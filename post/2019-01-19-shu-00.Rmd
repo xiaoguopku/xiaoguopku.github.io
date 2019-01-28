@@ -2,9 +2,9 @@
 layout: post
 title: "栏目“术”的写作计划"
 author: "Xiao"
-date: "`r Sys.Date()`"
+date: "2019-01-19"
 subtitle: ""
-description: ""
+description: "写作计划的简要列表"
 excerpt: ""
 image: ""
 showonlyimage: true
@@ -25,3 +25,12 @@ tags:
   + 大数据技术原理
 - 运用
   + 待计划
+
+-----------------------------------------------------------------------------------
+
+<font color=#808080 size=2>
+    更新说明：  
+    2019-01-19：v0.1.0，创建。  
+    2019-01-21：v1.0.0，发布。  
+    2019-01-28：v1.1.0，增加“更新说明”。
+</font>

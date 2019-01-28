@@ -1,0 +1,127 @@
+---
+layout: post
+title: "自定义形状的词云图的实现"
+author: "Xiao"
+date: "2019-01-27"
+subtitle: ""
+description: "这里，我们希望可以自定义形状，且图片的分辨率不受限制，其他设定可以尽可能灵活。"
+excerpt: ""
+image: ""
+URL: ""
+showtoc: false
+categories: ["技"]
+tags:
+    - 个人平台搭建
+    - Python
+    - 可视化
+---
+
+词云图是文本中词语出现*频次*的可视化形式之一，下面给出了一个例子。由于其视觉表现力较强，也被用于其他想表达某些词语*重要性*的图示的场合。或者仅仅是因为它比较炫，就用了这种形式。最近心血来潮，想看看词云图用作图标是什么效果。所以有了这篇文章。
+
+```{r echo=FALSE, fig.cap="一个词云图的例子", out.width = '30%'}
+knitr::include_graphics("icon2_colored.png")
+```
+
+最简单的词云图是方形或椭圆形，但如果能自定义形状，则其表现力将更强。这里，我们希望可以自定义形状，且图片的分辨率不受限制，其他设定可以尽可能灵活。
+
+## 方案选择
+
+经过简单调研，找到了对我来说相对比较合适的几种方案：
+
+1. 微信小程序：“词云文字”，优点在于操作非常简单，缺点在于形状不能完全自定义（虽然提供了100多种模板可供选择），且输出图片分辨率受限。
+2. 网页工具：[WordArt](https://wordart.com/create) ，优点在于操作简单，且可以自定义形状，缺点在于高分辨率图片的输出需要费用。
+3. R语言 [`wordcloud2`](https://cran.r-project.org/web/packages/wordcloud2/vignettes/wordcloud.html) 包，优点在于自己对R比较熟悉，上手会比较快，缺点在于自定义形状的功能似乎存在[bug](https://github.com/Lchiffon/wordcloud2/issues/12) 。使用方法可参考http://yalei.name/2016/06/wordcloud2 。
+4. Python的 [`wordcloud`](https://pypi.org/project/wordcloud/) 包，优点在于功能稳定且灵活性强，缺点在于学习成本相对高一些。
+
+本着强迫症和多学习的原则，这里采用第4中方案。
+
+## 流程
+
+### `wordcloud`包的安装
+
+我是Anaconda用户，用Anaconda来安装包的方法是在Anaconda Prompt中输入`conda install wordcloud` ，但是可能遇到下面的错误信息：`PackagesNotFoundError: The following packages are not available from current channels`，这时需要将`conda-forge`添加到通道中，用命令`conda config --append channels conda-forge`，然后重新安装。
+
+安装时还可能会遇到下面的问题：` Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": http://landinghub.visualstudio.com/visual-cpp-build-tools `。这说明需要安装Visual C++ Build Tools 2015工具，警告里给出的网址不能直接打开，但可参考下面的网站来下载 https://blog.csdn.net/bbhdeal/article/details/81144783 。
+
+Anaconda用户不应该在Windows命令行窗口中输入`pip install wordcloud`，因为Anaconda中的Spyder依然找不到该包。也不应该在Spyder的Console中输入`!pip install wordcloud`，这会使该包不易卸载与管理。（Anaconda用户卸载包的方法为在Anaconda Prompt中输入`conda remove package_name`，升级的命令为`conda update package_name`，查看所有包的命令为`conda list`）
+
+### 学习`wordcloud`包的用法
+
+该包用法的官方网页见 https://amueller.github.io/word_cloud/index.html 。GitHub项目地址见 https://github.com/amueller/word_cloud 。在pypi上的地址见 https://pypi.org/project/wordcloud/ 。可参考这些资料对包的用法进行学习。特别是官方网页中给出了几个典型例子的用法，我们可以在仅做极少量改动的情况下，实现我们所需的功能。
+
+### 形状图片准备与代码实现
+
+下面的代码为[官方网站中的代码](https://amueller.github.io/word_cloud/_downloads/fec2b7248974a5524bb3063a4a64d057/colored.py)修改参数而来。我们采用的文本为*The Communist Manifesto*，文本来自于 https://www.gutenberg.org/files/61/61.txt ，且排除了非正文部分。
+
+```python
+from os import path
+from PIL import Image
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+
+# get data directory (using getcwd() is needed to support running example in generated IPython notebook)
+d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
+
+# Read the whole text.
+text = open(path.join(d, 'Manifesto.txt')).read()
+
+icon_coloring = np.array(Image.open(path.join(d, "icon1.png")))
+stopwords = set(STOPWORDS)
+stopwords.add("said")
+
+wc = WordCloud(background_color="white", max_words=20000, mask=icon_coloring,
+               stopwords=stopwords, max_font_size=70,min_font_size=1,
+               contour_width=0,contour_color="red", random_state=1848)
+# generate word cloud
+wc.generate(text)
+
+# create coloring from image
+image_colors = ImageColorGenerator(icon_coloring)
+
+# show
+fig, axes = plt.subplots(1, 3)
+axes[0].imshow(wc, interpolation="bilinear")
+# recolor wordcloud and show
+# we could also give color_func=image_colors directly in the constructor
+axes[1].imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
+axes[2].imshow(icon_coloring, cmap=plt.cm.gray, interpolation="bilinear")
+for ax in axes:
+    ax.set_axis_off()
+plt.show()
+
+# store to file
+wc.to_file(path.join(d, "icon1_colored.png"))
+
+```
+
+其中*icon1.png*为自己设计的图片，如下两幅图所示。做第2幅图时，将上面代码中的icon1改为icon2。
+
+```{r echo=FALSE, fig.cap="形状图片1，命名为icon1.png", out.width = '30%'}
+knitr::include_graphics("icon1.png")
+```
+
+```{r echo=FALSE, fig.cap="形状图片2，命名为icon2.png", out.width = '30%'}
+knitr::include_graphics("icon2.png")
+```
+
+结果生成的图为：
+
+```{r echo=FALSE, fig.cap="结果1", out.width = '30%'}
+knitr::include_graphics("icon1_colored.png")
+```
+
+```{r echo=FALSE, fig.cap="结果2", out.width = '30%'}
+knitr::include_graphics("icon2_colored.png")
+```
+
+
+-----------------------------------------------------------------------------------
+
+<font color=#808080 size=2>
+    更新说明：  
+    2019-01-27：v0.1.0，创建并发布。  
+    2019-01-28：v1.0.0，发布。 
+</font>

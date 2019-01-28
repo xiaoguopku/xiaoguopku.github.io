@@ -8,7 +8,7 @@
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="">
+    <meta name="description" content="对R用户来说，数据分析报告的撰写是基本功之一。而可重复性分析报告（Reproducible reports）则是数据分析报告形式的最佳选择。……如何快速将R Markdown撰写的可重复性分析报告部署到个人网站中，是R用户搭建个人网站时必然需要思考的问题。">
     
     <meta name="keyword"  content="GuoXiao, Blog, 博客, 个人网站, R, R Markdown">
     <link rel="shortcut icon" href="/img/favicon.ico">
@@ -149,6 +149,10 @@
                             R
                         </a>
                         
+                        <a class="tag" href="/tags/%E4%B8%AA%E4%BA%BA%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA" title="个人平台搭建">
+                            个人平台搭建
+                        </a>
+                        
                     </div>
                     <h1>给R用户的个人网站搭建教程</h1>
                     <h2 class="subheading"></h2>
@@ -158,7 +162,7 @@
 			    Xiao
 			 
 			on 
-			Sunday, January 20, 2019
+			Saturday, January 19, 2019
                         
                     </span>
                 </div>
@@ -222,7 +226,7 @@
 </div>
 <div class="section level2">
 <h2>基本流程</h2>
-<p>这一部分主要参考了谢益辉的<a href="https://bookdown.org/yihui/blogdown/">blogdown: Creating Websites with R Markdown</a>一书，以及<a href="https://pages.github.com/">GitHub Pages</a>的部署说明。</p>
+<p>这一部分主要参考了谢益辉的 <a href="https://bookdown.org/yihui/blogdown/"><em>blogdown: Creating Websites with R Markdown</em></a> 一书，以及<a href="https://pages.github.com/">GitHub Pages</a>的部署说明。</p>
 <div class="section level3">
 <h3>准备工作</h3>
 <p>这里假设读者已经是R用户了，应而已经安装了R和RStudio，已经熟悉了R语法、R Markdown 语法。如果读者还不具备这些能力，可参考<a href="https://www.rstudio.com/online-learning/">RStudio官网上的建议</a>进行学习。本网站今后也会逐步发布相关教程。</p>
@@ -231,8 +235,8 @@
 <div class="section level3">
 <h3>生成网站文件</h3>
 <div id="blogdownhugo" class="section level4">
-<h4>安装blogdown包和Hugo</h4>
-<p>在RStudio的Console中输入<code>install.packages(&quot;blogdown&quot;)</code>来安装blogdown包。</p>
+<h4>安装<code>blogdown</code>包和Hugo</h4>
+<p>在RStudio的Console中输入<code>install.packages(&quot;blogdown&quot;)</code>来安装<code>blogdown</code>包。</p>
 <p>输入<code>blogdown::install_hugo()</code>安装Hugo。</p>
 </div>
 <div class="section level4">
@@ -258,19 +262,27 @@
 |_index.Rmd
 |_MyWebsite01.Rproj
 </code></pre>
-<p>content/文件夹中的内容是我们博客的主体，我们今后增加博客，便是在此新建md文件或Rmd文件，该文件夹下的结构是任意的。static/ 文件夹下包含图片、CSS文件等静态资产文件，所有static/ 文件夹下的内容都会被复制到public/ 文件夹下。public/文件夹中的内容便是要部署到GitHub Pages中的文件。</p>
+<p><em>content/</em> 文件夹中的内容是我们博客的主体，我们今后增加博客，便是在此新建md文件或Rmd文件，该文件夹下的结构是任意的。<em>static/</em> 文件夹下包含图片、CSS文件等静态资产文件，所有 <em>static/</em> 文件夹下的内容都会被复制到 <em>public/</em> 文件夹下。<em>public/</em> 文件夹中的内容便是要部署到GitHub Pages中的文件。</p>
 </div>
 <div class="section level4">
 <h4>将网站模板修改为自己需要的内容</h4>
 <p>由于选取的网站主题不同，下面的操作需要根据不同的主题而有所调整。</p>
-<p>你会在content/post/文件夹下看到一些md文件，每篇博文对应1个md文件。打开一个md文件，其中内容分为两部分，上半部分上下用三个减号包围，称为YAML块，它起到设置的作用。下半部分是Markdown文本，作为博文的内容。你将其中的内容换成你的博文内容，再根据情况做个性化设置，保存后就可以看到网站内容的变化了。</p>
+<p>你会在 <em>content/post/</em> 文件夹下看到一些md文件，每篇博文对应1个md文件。打开一个md文件，其中内容分为两部分，上半部分上下用三个减号包围，称为YAML块，它起到设置的作用。下半部分是Markdown文本，作为博文的内容。你将其中的内容换成你的博文内容，再根据情况做个性化设置，保存后就可以看到网站内容的变化了。</p>
 <p>你也可以用R Markdown （Rmd文件）代替md文件，YAML块可以保持不变，用R Markdown语法代替Markdown即可。二者差异不大，但Rmd文件中，可执行R代码，而不仅仅是作为文本展示出来。</p>
-<p>此外，你需要调整config.toml文件中的内容。不同的主题，config.toml中的内容可能差异非常大，具体如何调整，你需要查阅关于该主题的更多的资料。一般来说，该主题的GitHub项目中，会有README文件，其中会有部分相关内容。</p>
+<p>此外，你需要调整 <em>config.toml</em> 文件中的内容。不同的主题，<em>config.toml</em> 中的内容可能差异非常大，具体如何调整，你需要查阅关于该主题的更多的资料。一般来说，该主题的GitHub项目中，会有 <em>README</em> 文件，其中会有部分相关内容。</p>
 </div>
 </div>
 <div id="github-pages" class="section level3">
 <h3>部署到GitHub Pages中</h3>
-<p>请参考<a href="https://pages.github.com/">GitHub Pages</a>官方说明。</p>
+<p>首次部署，请参考<a href="https://pages.github.com/">GitHub Pages</a>官方说明。</p>
+<p>之后，直接对本地项目文件夹如 <em>username.github.io/</em> 下的对应文件进行修改即可。如果修改较大，可以用新文件与文件夹替换除了 <em>.git/</em> 文件夹外的所有其他文件与文件夹。然后重新push一次（我用GitHub桌面版，选择该项目，会看到修改，然后填写修改说明，点Commit to master，最后点Publish branch）。</p>
+<hr />
+<p><font color=#808080 size=2>
+更新说明：<br />
+2019-01-19：v0.1.0，创建。<br />
+2019-01-21：v1.0.0，发布。<br />
+2019-01-28：v1.1.0，增加“部署到GitHub Pages中”一节内容，增加“更新说明”，修改部分格式。
+</font></p>
 </div>
 </div>
 
@@ -308,6 +320,16 @@
                     <div class="tags">
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA" title="个人平台搭建">
+                            个人平台搭建
+                        </a>
                         
                         
                         

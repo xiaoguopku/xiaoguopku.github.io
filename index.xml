@@ -6,36 +6,18 @@
     <description>Recent content on GuoXiao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>栏目“术”的写作计划</title>
-      <link>/post/2019-01-19-shu-00/</link>
-      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
+      <title>自定义形状的词云图的实现</title>
+      <link>/post/2019-01-26-wordcloud-01/</link>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019-01-19-shu-00/</guid>
-      <description>原理 统计学原理 机器学习原理 深度学习原理 计算机网络原理 计算机体系结构原理 大数据技术原理 运用 待计划</description>
-    </item>
-    
-    <item>
-      <title>栏目“道”的写作计划</title>
-      <link>/post/2019-01-19-dao-00/</link>
-      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-01-19-dao-00/</guid>
-      <description>读书笔记 待计划 个人思考 待计划</description>
-    </item>
-    
-    <item>
-      <title>给R用户的个人网站搭建教程</title>
-      <link>/post/2019-01-19-blogdown-01/</link>
-      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-01-19-blogdown-01/</guid>
-      <description>R用户的需求与网站架构选择 数据分析的编程语言主要有R和Python两大阵营。现阶段，Python已占了优势，且在国内，Python是绝对主流</description>
+      <guid>/post/2019-01-26-wordcloud-01/</guid>
+      <description>词云图是文本中词语出现频次的可视化形式之一，下面给出了一个例子。由于其视觉表现力较强，也被用于其他想表达某些词语重要性的图示的场合。或者仅仅</description>
     </item>
     
     <item>
@@ -45,6 +27,33 @@
       
       <guid>/top/about/</guid>
       <description>初心 我时常在思考，推动社会发展的因素有哪些，我能够从哪些方面为此献出一份力量。生产力当然是最重要的一个方面。生产力的变革以技术突破为基础。在</description>
+    </item>
+    
+    <item>
+      <title>栏目“术”的写作计划</title>
+      <link>/post/2019-01-19-shu-00/</link>
+      <pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-01-19-shu-00/</guid>
+      <description>原理 统计学原理 机器学习原理 深度学习原理 计算机网络原理 计算机体系结构原理 大数据技术原理 运用 待计划 更新说明： 2019-01-19：v0.1.0，</description>
+    </item>
+    
+    <item>
+      <title>栏目“道”的写作计划</title>
+      <link>/post/2019-01-19-dao-00/</link>
+      <pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-01-19-dao-00/</guid>
+      <description>读书笔记 待计划 个人思考 待计划 更新说明： 2019-01-19：v0.1.0，创建。 2019-01-21：v1.0.0，发布。 2019-01-2</description>
+    </item>
+    
+    <item>
+      <title>给R用户的个人网站搭建教程</title>
+      <link>/post/2019-01-19-blogdown-01/</link>
+      <pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-01-19-blogdown-01/</guid>
+      <description>R用户的需求与网站架构选择 数据分析的编程语言主要有R和Python两大阵营。现阶段，Python已占了优势，且在国内，Python是绝对主流</description>
     </item>
     
     <item>

@@ -6,7 +6,7 @@
     <description>Recent content in R Markdown on GuoXiao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>给R用户的个人网站搭建教程</title>
       <link>/post/2019-01-19-blogdown-01/</link>
-      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2019-01-19-blogdown-01/</guid>
       <description>R用户的需求与网站架构选择 数据分析的编程语言主要有R和Python两大阵营。现阶段，Python已占了优势，且在国内，Python是绝对主流</description>

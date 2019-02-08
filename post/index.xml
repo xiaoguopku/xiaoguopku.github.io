@@ -6,10 +6,19 @@
     <description>Recent content in Posts on GuoXiao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R notebook 中 R 代码块含中文注释问题</title>
+      <link>/post/2019-02-08-rmarkdown-101/</link>
+      <pubDate>Fri, 08 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-02-08-rmarkdown-101/</guid>
+      <description>问题描述 发现了一个 Windows 平台下的关于中文注释的 R notebook 漏洞: 如果在一个 Rmd 文件中输入以下代码： --- title: &amp;quot;R Notebook&amp;quot; output: html_notebook --- ```{r} x &amp;lt;- 1 # 上一行是任意R代码。下一行是某些</description>
+    </item>
     
     <item>
       <title>自定义形状的词云图的实现</title>

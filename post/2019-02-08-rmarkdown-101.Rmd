@@ -1,0 +1,176 @@
+---
+layout: post
+title: "R notebook 中 R 代码块含中文注释问题"
+author: "Xiao"
+date: "2019-02-08"
+subtitle: ""
+description: "中文注释后添加 tab 键"
+excerpt: ""
+image: ""
+URL: ""
+showtoc: false
+categories: ["技"]
+tags:
+    - R Markdown
+    - R Notebook
+---
+
+## 问题描述
+
+发现了一个 Windows 平台下的关于中文注释的 R notebook 漏洞:
+
+如果在一个 Rmd 文件中输入以下代码：
+
+````markdown
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+`r '\x60\x60\x60{r}
+x <- 1
+# 上一行是任意R代码。下一行是某些特殊的R代码注释。这一行是某些随机的特殊的中文注释，如不
+# anyval <- AnyFuncWithMoreThanTwoArg(a,b)
+\x60\x60\x60'`
+````
+
+注意上面是 R Notebook，不是普通的 R Markdown，也就是说在 YAML 块的设置中，`output` 的格式是 `html_notebook` 而非 `html_document`。二者在运行方式上有些不同，下面的问题仅针对 R Notebook。
+
+该代码的特点在于 R 代码块中含有中文注释，但并非所有含有中文注释的代码块都会出现该问题，仅有某些特殊的注释才会出现问题，且出现问题的注释的规律不容易找到。
+
+当 Windows 系统上的 RStudio 运行（Ctrl+Shift+Enter）上面的代码块后，会出现下面的两种警告（之一或更多，与运行次数有关）：
+
+```
+Warning messages:
+1: In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
+  EOF within quoted string
+2: In strsplit(code, "\n", fixed = TRUE) :
+  input string 1 is invalid in this locale
+```
+
+不过上面的警告并不是重点。重点在于当我们保存该文件时，上方会出现一个错误提示：
+
+```
+Error creating notebook: non-numeric argument to binary operator.See line 6.
+```
+一旦出现了上面的错误提示之后，在下方加上任何文字，都无法渲染成完整的文档。比如你在下方输入
+
+```
+
+
+下面是含有`source`的代码：
+
+```
+
+然后点 Preview 对文档进行渲染（或Ctrl+Shift+K），新加入的那句话无法显示在新渲染的文档中。
+
+## 解决方案
+
+### 方案1：中文注释后添加 tab 键
+
+第1种解决该问题的方法为，在中文注释后面添加 tab 键，重新运行代码块，再重新渲染。
+
+虽然在第一次重新运行后，依然有上面的两种警告，错误提示也没有消失，但重新渲染后，错误提示会消失，且后添加的文字也会正常渲染，之后只有警告，不会出现无法渲染的现象。
+
+如果你刚才添加 tab 键之后，不是重新运行代码1次，而是运行2次，你会发现第二次的警告只剩下了一个：
+
+```
+Warning message:
+In strsplit(code, "\n", fixed = TRUE) :
+  input string 1 is invalid in this locale
+```
+
+且之后无论怎样重新运行或重新渲染，都不会出现更多的警告。这说明了刚才的错误提示不会重现。由于 R Notebook 的特点是方便进行数据探索，报告是给数据分析师自己看，所以那个警告并不重要。如果需要将报告给其他人看，一定要消除这个警告，则可以在整个报告完成之后，将 `output` 格式由 `html_notebook` 改为 `html_document`，且在 R 代码块中添加 `warning=FALSE` 的设置。
+
+### 方案2：设置 `locale`
+
+在第一个出现问题的代码块中设置 `locale`，如将整个文件改为：
+
+````markdown
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+`r '\x60\x60\x60{r}
+Sys.setlocale(category = "LC_ALL", locale = "C")
+x <- 1
+# 上一行是任意R代码。下一行是某些特殊的R代码注释。这一行是某些随机的特殊的中文注释，如不
+# anyval <- AnyFuncWithMoreThanTwoArg(a,b)
+\x60\x60\x60'`
+````
+
+### 两种方案对之后 source 语句的影响
+
+无论在 R 脚本、R Markdown 或 R Notebook 中，如果没有特别设置 `locale`，需要注意下面的问题：如果被 `source` 的代码需要处理中文字符串（如图标题含有中文），在 `source` 语句中，必须指定 encoding。一般被 `source` 的脚本存为 `utf-8` 编码，`source` 指定编码方式也为 `utf-8`。
+
+但当设置了 `locale` 之后，在 `source` 语句中，不应指定 `encoding`，无论指定 `"uft-8"` 或 `"CP936"` 都会报错。被 `source` 的代码中的 `source` 语句同理。此时被 `source` 的脚本也应存为 `utf-8` 编码，而非 `CP936` 编码。
+
+下面举例说明两种方案中 `source` 语句的处理。
+
+一个名为*PlotChinese.R*的脚本中含有以下代码（编码为utf-8）：
+
+```r
+plotChinese <- function(x) {
+  # 中文注释
+  plot(x)
+  title("中文标题")
+}
+```
+
+我们需要调用其中的函数，则对于第1种方案，在其后用以下代码：
+
+````markdown
+`r '\x60\x60\x60{r}
+source("PlotChinese.R",encoding = "utf-8")
+plotChinese(x)
+\x60\x60\x60'`
+````
+
+第2种方案，在其后用以下代码：
+
+````markdown
+`r '\x60\x60\x60{r}
+source("PlotChinese.R")
+plotChinese(x)
+\x60\x60\x60'`
+````
+
+还需注意的一点是，如果某次指定了 `locale`，要想消除其影响，必须重启 RStudio。
+
+为了尽可能减少指定 `locale` 对系统的影响，建议采用第1种方案。
+
+## 无效方案讨论
+
+下面说1种无效的解决方案：
+
+### 在代码块的全局设置中指定 `encoding`
+
+在 YAML 块后的文档开头添加全局设置，如将整个文件改为：
+
+````markdown
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+`r '\x60\x60\x60{r global_options, include=FALSE}
+knitr::opts_chunk$set(encoding="UTF-8")
+\x60\x60\x60'`
+
+`r '\x60\x60\x60{r}
+x <- 1
+# 上一行是任意R代码。下一行是某些特殊的R代码注释。这一行是某些随机的特殊的中文注释，如不
+# anyval <- AnyFuncWithMoreThanTwoArg(a,b)
+\x60\x60\x60'`
+````
+
+依次运行两个代码块之后，保存文件，依然会出现错误提示。之后添加的文本依然无法渲染。
+
+-----------------------------------------------------------------------------------
+
+<font color=#808080 size=2>
+    更新说明：  
+    2019-01-30：v0.1.0，创建。  
+    2019-02-08：v1.0.0，发布。
+</font>

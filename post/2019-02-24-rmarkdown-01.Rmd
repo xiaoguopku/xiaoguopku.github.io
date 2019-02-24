@@ -1,0 +1,241 @@
+---
+layout: post
+title: "R Markdown 学习指南与速查手册（1）"
+author: "Xiao"
+date: "2019-02-24"
+subtitle: "R Markdown 简介（上）"
+description: "使用 R Markdown 的动机有以下几点 ：1. 可重复性分析报告的利器；2. 可生成博客和书籍；3. 形式丰富"
+excerpt: ""
+image: ""
+URL: ""
+showtoc: false
+categories: ["技"]
+tags: ["R Markdown", "R"]
+
+---
+
+## 动机
+
+使用 R Markdown 的动机有以下几点 ：
+
+- R Markdown 是撰写可重复性分析报告的最佳工具之一，竞争对手仅包括 jupyter 笔记本等少数其他工具。是R用户撰写数据分析报告的最佳选择。
+- 基于 R Markdown 可以方便生成博客网站（如本网站）、或电子书（gitbook 形式，如 https://bookdown.org/yihui/bookdown/ 或 PDF 形式、epub 形式等），这对于复杂文档系统的表达也很有好处。
+- 表达形式十分丰富，下一节会有具体展示。
+
+在我的 [《给R用户的个人网站搭建教程》](https://xiaoguopku.github.io/post/2019-01-19-blogdown-01/) 一文中，我已经提到了可重复性分析报告相比于传统分析报告的优点，这里再抄录如下：
+
+>- 代码与说明文字有机结合，使得代码更加易读，而说明文字更有说服力。它与在程序中直接写注释的区别在于，文字是富文本格式，可以有非常美观的排版，且还可以包含图表及更丰富的展示形式（如互动式图表、仪表盘等，可参看https://rmarkdown.rstudio.com/gallery.html）。
+>- 结果是直接通过代码生成的，因而任何数据、方法的改动会直接导致结果的变化，而无需担心忘记更新结果。
+>- 任何阅读报告的人，可通过报告中的代码，复现报告中的结果，因而报告是可重复，因而是可信的。只要数据源不作假，在整个分析过程与结果中，没有任何造假的空间。想通过PS对结果图进行修改，或者伪造、篡改中间数据来造假都是不可能的。
+
+## 功能展示
+
+### 普通功能
+
+#### 多级标题
+
+这篇文章就是 R Markdown 创作的，你可以看到“功能展示”是1级标题，“普通功能”是2级标题，“多级标题”是3级标题。各级标题的字号不同。
+
+#### 字体
+
+自定义字体是可以实现的，如下（部分手机端可能无法显示字体区别）：
+
+<span style="font-family:宋体;">宋体</span> 
+<span style="font-family:黑体;">黑体</span> 
+<span style="font-family:楷体;">楷体</span> 
+<span style="font-family:微软雅黑;">微软雅黑</span> 
+
+<span style="font-family:Times New Roman;">Times New Roman</span> 
+<span style="font-family:Courier New;">Courier New</span> 
+<span style="font-family:Arial;">Arial</span> 
+
+#### 字号
+
+<span style="font-size:5px;">字号5px</span> 
+<span style="font-size:10px;">字号10px</span> 
+<span style="font-size:15px;">字号15px</span> 
+<span style="font-size:20px;">字号20px</span> 
+<span style="font-size:25px;">字号25px</span> 
+
+#### 文字颜色
+
+<span style="color:red;">红色文字</span> 
+<span style="color:green;">绿色文字</span> 
+<span style="color:blue;">蓝色文字</span> 
+<span style="color:yellow;">黄色文字</span> 
+<span style="color:grey;">灰色文字</span> 
+<span style="color:#33C0FF;">文字色号#33C0FF</span> 
+
+#### 背景颜色
+
+<span style="background-color:red;">背景为红色</span> 
+<span style="background-color:yellow;">背景为黄色</span> 
+<span style="background-color:green;">背景为绿色</span> 
+<span style="background-color:grey;">灰色文字</span> 
+<span style="background-color:#33FF8B;">背景色号为#33FF8B</span>
+
+#### 字形变化
+
+*斜体* **加粗** ***粗斜体***
+<p style="text-decoration: underline;">下划线</p>
+<p style="text-decoration: line-through;">删除线</p>
+<p style="text-decoration: overline;">上划线</p>
+<!-- ~~删除线的Markdown表达~~ -->
+
+#### 对齐
+
+这是左对齐的段落（默认）。文字超过一行。由于网址较长，它被分在了第2行，https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/ 。这样，第1行文字就不足一行了，会分散开来显示。读者可对比这一段和分散对齐段落的区别。（不同窗口宽度，其效果可能有差异）
+
+<p style="text-align:center;">这是居中对齐的段落。</p>
+
+<p style="text-align:right;">这是右对齐的段落。</p>
+
+<p style="text-align:justify;">这是分散对齐的段落，文字不到一行。</p>
+
+<p style="text-align:justify;">这是分散对齐的段落，文字超过一行。由于网址较长，它被分在了第2行，https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/ 。这样，第1行文字就不足一行了，它会左对齐而非散开对齐显示。读者可对比这一段和左对齐段落的区别。</p>
+
+<p style="text-align:justify;text-justify:distribute-all-lines;text-align-last:justify;">这是单行强制分散对齐。</p>
+
+
+<p style="text-align:center;">
+  <span style="text-decoration: underline;background-color:yellow;color:blue;font-size:25px;font-family:楷体;">文字的各种形式集中展示</span>
+</p>
+
+#### 缩进
+
+<p style="text-indent:32px;">
+首行缩进：这是超过一行的段落，第1行进行了缩进，接下所有行没有缩进。缩进的宽度是可以调节的。这里展示的常见的缩进两个汉字宽度的形式，可以设置为`2em`或`32px`。
+</p>
+
+<p style="text-indent:-5em;padding-left:5em;">
+悬挂缩进：这是超过一行的段落，第1行未进行缩进，接下来所有行都进行了缩进。缩进的宽度是可以调节的。这里展示的缩进5个汉字宽度的形式。
+</p>
+
+<p style="padding-left:2em;">
+整体左缩进：这是超过一行的段落，所有行左侧都进行了缩进。缩进的宽度是可以调节的。这里展示的缩进2个汉字宽度的形式。
+</p>
+
+<p style="padding-left:2em;padding-right:2em">
+整体左右均缩进：这是超过一行的段落，所有行左、右侧都进行了缩进。缩进的宽度是可以调节的。这里展示的缩进2个汉字宽度的形式。
+</p>
+
+#### 行间距
+
+<p style="line-height:100%;">
+一般来说，行间距不需要手动调整。  
+Markdown会自动调整行间距。  
+但如果一定要手动调整，也是可以的。  
+比如这几行的行间距就比较小。 
+设置值可以是px，也可以是百分比。
+</p>
+
+#### 引用、无序/有序列表
+
+1. 在“动机”部分给出了无序列表加引用的例子。
+2. 这里是一个有序列表的例子。
+
+#### 代码块与代码高亮
+
+```r
+# 这是一段仅供展示而未运行的 R 代码，具有 R 风格的高亮形式
+a <- -5:5
+f <- function(x) {
+  return(ifelse(x>0,x,0))
+}
+b <- f(a)
+```
+
+```python
+# 这是一段仅供展示而未运行的 Python 代码，具有 Python 风格的高亮形式
+import numpy as np
+a = np.arange(-5,6)
+def f(x):
+    return np.where(a > 0, a, 0)
+b = f(a)
+```
+
+#### 数学公式
+
+待续。
+
+
+#### 插入图片
+
+```{r echo=FALSE, fig.cap="插入本地图片", out.width = '30%'}
+knitr::include_graphics("home-bg-sun-people.jpg")
+```
+
+```{r echo=FALSE, fig.cap="来自网络的图片，网址为https://d33wubrfki0l68.cloudfront.net/aee91187a9c6811a802ddc524c3271302893a149/a7003/images/bandthree2.png", out.width = '30%'}
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/aee91187a9c6811a802ddc524c3271302893a149/a7003/images/bandthree2.png")
+```
+
+#### 动图
+
+```{r echo=FALSE, fig.cap="gif动图示意", out.width = '30%'}
+knitr::include_graphics("heartbeat-gif.gif")
+```
+
+<!-- ![gif动图示意](heartbeat-gif.gif) -->
+
+#### 表情
+
+`r emo::ji("face with tears of joy")` `r emo::ji("slightly smiling face")`
+`r emo::ji("smirking face")` `r emo::ji("smiling face with sunglasses")` 
+
+#### 视频
+
+<video controls>
+  <source src="video-example.mp4" type="video/mp4">
+</video>
+
+<span style="font-size:12px;"> *来自本地的视频。*</span>
+
+<video controls>
+  <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+</video>
+
+<span style="font-size:12px;"> *来自网络的视频，网址为：https://www.w3schools.com/html/movie.mp4 *</span>
+
+#### 音频
+
+<audio controls>
+  <source src="audio-example.mp3" type="audio/mp3">
+</audio>
+
+#### 附件
+
+<a href="data.csv" download="data.csv">点击下载附件 *data.csv*</a>
+
+#### 分隔线
+
+---
+
+#### 表格
+
+-------------------------------------------------------------
+ Centered   Default           Right Left
+  Header    Aligned         Aligned Aligned
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+-------------------------------------------------------------
+
+#### 链接
+
+上文已有展示。
+
+### 特色功能
+
+在下一篇博客中展示。
+
+-----------------------------------------------------------------------------------
+
+<font color=#808080 size=2>
+    更新说明：  
+    2019-02-24：v0.1.0，创建。  
+    2019-02-25：v1.0.0，发布。
+</font>

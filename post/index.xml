@@ -6,10 +6,19 @@
     <description>Recent content in Posts on GuoXiao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R Markdown 学习指南与速查手册（1）</title>
+      <link>/post/2019-02-24-rmarkdown-01/</link>
+      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-02-24-rmarkdown-01/</guid>
+      <description>动机 使用 R Markdown 的动机有以下几点 ： R Markdown 是撰写可重复性分析报告的最佳工具之一，竞争对手仅包括 jupyter 笔记本等少数其他工具。是R用户撰写数据分析报告的最佳</description>
+    </item>
     
     <item>
       <title>R notebook 中 R 代码块含中文注释问题</title>

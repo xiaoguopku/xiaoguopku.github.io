@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="google-site-verification" content="9vIieCe-Qpd78QOmBl63rGtIVbhY6sYyuxX3j8XWBA4" />
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="使用 R Markdown 的动机有以下几点 ：1. 可重复性分析报告的利器；2. 可生成博客和书籍；3. 形式丰富">
+    
+    <meta name="keyword"  content="GuoXiao, Blog, 博客, 个人网站, R, R Markdown">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>R Markdown 学习指南与速查手册（1）-GuoXiao&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2019-02-24-rmarkdown-01/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">GuoXiao&#39;s Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E6%8A%80">技</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E6%9C%AF">术</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/%E9%81%93">道</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/about/">关于</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-sun-people.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/r-markdown" title="R Markdown">
+                            R Markdown
+                        </a>
+                        
+                        <a class="tag" href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                    </div>
+                    <h1>R Markdown 学习指南与速查手册（1）</h1>
+                    <h2 class="subheading">R Markdown 简介（上）</h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Xiao
+			 
+			on 
+			Sunday, February 24, 2019
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+                
+
+
+<div class="section level2">
+<h2>动机</h2>
+<p>使用 R Markdown 的动机有以下几点 ：</p>
+<ul>
+<li>R Markdown 是撰写可重复性分析报告的最佳工具之一，竞争对手仅包括 jupyter 笔记本等少数其他工具。是R用户撰写数据分析报告的最佳选择。</li>
+<li>基于 R Markdown 可以方便生成博客网站（如本网站）、或电子书（gitbook 形式，如 <a href="https://bookdown.org/yihui/bookdown/" class="uri">https://bookdown.org/yihui/bookdown/</a> 或 PDF 形式、epub 形式等），这对于复杂文档系统的表达也很有好处。</li>
+<li>表达形式十分丰富，下一节会有具体展示。</li>
+</ul>
+<p>在我的 <a href="https://xiaoguopku.github.io/post/2019-01-19-blogdown-01/">《给R用户的个人网站搭建教程》</a> 一文中，我已经提到了可重复性分析报告相比于传统分析报告的优点，这里再抄录如下：</p>
+<blockquote>
+<ul>
+<li>代码与说明文字有机结合，使得代码更加易读，而说明文字更有说服力。它与在程序中直接写注释的区别在于，文字是富文本格式，可以有非常美观的排版，且还可以包含图表及更丰富的展示形式（如互动式图表、仪表盘等，可参看https://rmarkdown.rstudio.com/gallery.html）。</li>
+<li>结果是直接通过代码生成的，因而任何数据、方法的改动会直接导致结果的变化，而无需担心忘记更新结果。</li>
+<li>任何阅读报告的人，可通过报告中的代码，复现报告中的结果，因而报告是可重复，因而是可信的。只要数据源不作假，在整个分析过程与结果中，没有任何造假的空间。想通过PS对结果图进行修改，或者伪造、篡改中间数据来造假都是不可能的。</li>
+</ul>
+</blockquote>
+</div>
+<div class="section level2">
+<h2>功能展示</h2>
+<div class="section level3">
+<h3>普通功能</h3>
+<div class="section level4">
+<h4>多级标题</h4>
+<p>这篇文章就是 R Markdown 创作的，你可以看到“功能展示”是1级标题，“普通功能”是2级标题，“多级标题”是3级标题。各级标题的字号不同。</p>
+</div>
+<div class="section level4">
+<h4>字体</h4>
+<p>自定义字体是可以实现的，如下（部分手机端可能无法显示字体区别）：</p>
+<p><span style="font-family:宋体;">宋体</span>
+<span style="font-family:黑体;">黑体</span>
+<span style="font-family:楷体;">楷体</span>
+<span style="font-family:微软雅黑;">微软雅黑</span></p>
+<p><span style="font-family:Times New Roman;">Times New Roman</span>
+<span style="font-family:Courier New;">Courier New</span>
+<span style="font-family:Arial;">Arial</span></p>
+</div>
+<div class="section level4">
+<h4>字号</h4>
+<p><span style="font-size:5px;">字号5px</span>
+<span style="font-size:10px;">字号10px</span>
+<span style="font-size:15px;">字号15px</span>
+<span style="font-size:20px;">字号20px</span>
+<span style="font-size:25px;">字号25px</span></p>
+</div>
+<div class="section level4">
+<h4>文字颜色</h4>
+<p><span style="color:red;">红色文字</span>
+<span style="color:green;">绿色文字</span>
+<span style="color:blue;">蓝色文字</span>
+<span style="color:yellow;">黄色文字</span>
+<span style="color:grey;">灰色文字</span>
+<span style="color:#33C0FF;">文字色号#33C0FF</span></p>
+</div>
+<div class="section level4">
+<h4>背景颜色</h4>
+<p><span style="background-color:red;">背景为红色</span>
+<span style="background-color:yellow;">背景为黄色</span>
+<span style="background-color:green;">背景为绿色</span>
+<span style="background-color:grey;">灰色文字</span>
+<span style="background-color:#33FF8B;">背景色号为#33FF8B</span></p>
+</div>
+<div class="section level4">
+<h4>字形变化</h4>
+<em>斜体</em> <strong>加粗</strong> <strong><em>粗斜体</em></strong>
+<p style="text-decoration: underline;">
+下划线
+</p>
+<p style="text-decoration: line-through;">
+删除线
+</p>
+<p style="text-decoration: overline;">
+上划线
+</p>
+<!-- ~~删除线的Markdown表达~~ -->
+</div>
+<div class="section level4">
+<h4>对齐</h4>
+<p>这是左对齐的段落（默认）。文字超过一行。由于网址较长，它被分在了第2行，<a href="https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/" class="uri">https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/</a> 。这样，第1行文字就不足一行了，会分散开来显示。读者可对比这一段和分散对齐段落的区别。（不同窗口宽度，其效果可能有差异）</p>
+<p style="text-align:center;">
+这是居中对齐的段落。
+</p>
+<p style="text-align:right;">
+这是右对齐的段落。
+</p>
+<p style="text-align:justify;">
+这是分散对齐的段落，文字不到一行。
+</p>
+<p style="text-align:justify;">
+这是分散对齐的段落，文字超过一行。由于网址较长，它被分在了第2行，<a href="https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/" class="uri">https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/</a> 。这样，第1行文字就不足一行了，它会左对齐而非散开对齐显示。读者可对比这一段和左对齐段落的区别。
+</p>
+<p style="text-align:justify;text-justify:distribute-all-lines;text-align-last:justify;">
+这是单行强制分散对齐。
+</p>
+<p style="text-align:center;">
+<span style="text-decoration: underline;background-color:yellow;color:blue;font-size:25px;font-family:楷体;">文字的各种形式集中展示</span>
+</p>
+</div>
+<div class="section level4">
+<h4>缩进</h4>
+<p style="text-indent:32px;">
+首行缩进：这是超过一行的段落，第1行进行了缩进，接下所有行没有缩进。缩进的宽度是可以调节的。这里展示的常见的缩进两个汉字宽度的形式，可以设置为<code>2em</code>或<code>32px</code>。
+</p>
+<p style="text-indent:-5em;padding-left:5em;">
+悬挂缩进：这是超过一行的段落，第1行未进行缩进，接下来所有行都进行了缩进。缩进的宽度是可以调节的。这里展示的缩进5个汉字宽度的形式。
+</p>
+<p style="padding-left:2em;">
+整体左缩进：这是超过一行的段落，所有行左侧都进行了缩进。缩进的宽度是可以调节的。这里展示的缩进2个汉字宽度的形式。
+</p>
+<p style="padding-left:2em;padding-right:2em">
+整体左右均缩进：这是超过一行的段落，所有行左、右侧都进行了缩进。缩进的宽度是可以调节的。这里展示的缩进2个汉字宽度的形式。
+</p>
+</div>
+<div class="section level4">
+<h4>行间距</h4>
+<p style="line-height:100%;">
+一般来说，行间距不需要手动调整。<br />
+Markdown会自动调整行间距。<br />
+但如果一定要手动调整，也是可以的。<br />
+比如这几行的行间距就比较小。
+设置值可以是px，也可以是百分比。
+</p>
+</div>
+<div class="section level4">
+<h4>引用、无序/有序列表</h4>
+<ol style="list-style-type: decimal">
+<li>在“动机”部分给出了无序列表加引用的例子。</li>
+<li>这里是一个有序列表的例子。</li>
+</ol>
+</div>
+<div class="section level4">
+<h4>代码块与代码高亮</h4>
+<pre class="r"><code># 这是一段仅供展示而未运行的 R 代码，具有 R 风格的高亮形式
+a &lt;- -5:5
+f &lt;- function(x) {
+  return(ifelse(x&gt;0,x,0))
+}
+b &lt;- f(a)</code></pre>
+<pre class="python"><code># 这是一段仅供展示而未运行的 Python 代码，具有 Python 风格的高亮形式
+import numpy as np
+a = np.arange(-5,6)
+def f(x):
+    return np.where(a &gt; 0, a, 0)
+b = f(a)</code></pre>
+</div>
+<div class="section level4">
+<h4>数学公式</h4>
+<p>待续。</p>
+</div>
+<div class="section level4">
+<h4>插入图片</h4>
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="home-bg-sun-people.jpg" alt="插入本地图片" width="30%" />
+<p class="caption">
+Figure 1: 插入本地图片
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="https://d33wubrfki0l68.cloudfront.net/aee91187a9c6811a802ddc524c3271302893a149/a7003/images/bandthree2.png" alt="来自网络的图片，网址为https://d33wubrfki0l68.cloudfront.net/aee91187a9c6811a802ddc524c3271302893a149/a7003/images/bandthree2.png" width="30%" />
+<p class="caption">
+Figure 2: 来自网络的图片，网址为https://d33wubrfki0l68.cloudfront.net/aee91187a9c6811a802ddc524c3271302893a149/a7003/images/bandthree2.png
+</p>
+</div>
+</div>
+<div class="section level4">
+<h4>动图</h4>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="heartbeat-gif.gif" alt="gif动图示意" width="30%" />
+<p class="caption">
+Figure 3: gif动图示意
+</p>
+</div>
+<!-- ![gif动图示意](heartbeat-gif.gif) -->
+</div>
+<div class="section level4">
+<h4>表情</h4>
+<p>😂 🙂
+😏 😎</p>
+</div>
+<div class="section level4">
+<h4>视频</h4>
+<video controls>
+<source src="video-example.mp4" type="video/mp4">
+</video>
+<p><span style="font-size:12px;"> <em>来自本地的视频。</em></span></p>
+<video controls>
+<source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+</video>
+<p><span style="font-size:12px;"> <em>来自网络的视频，网址为：<a href="https://www.w3schools.com/html/movie.mp4" class="uri">https://www.w3schools.com/html/movie.mp4</a> </em></span></p>
+</div>
+<div class="section level4">
+<h4>音频</h4>
+<audio controls>
+<source src="audio-example.mp3" type="audio/mp3">
+</audio>
+</div>
+<div class="section level4">
+<h4>附件</h4>
+<p><a href="data.csv" download="data.csv">点击下载附件 <em>data.csv</em></a></p>
+</div>
+<div class="section level4">
+<h4>分隔线</h4>
+<hr />
+</div>
+<div class="section level4">
+<h4>表格</h4>
+<table style="width:86%;">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="22%" />
+<col width="36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Centered
+Header</th>
+<th>Default
+Aligned</th>
+<th align="right">Right
+Aligned</th>
+<th align="left">Left
+Aligned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">First</td>
+<td>row</td>
+<td align="right">12.0</td>
+<td align="left">Example of a row that
+spans multiple lines.</td>
+</tr>
+<tr class="even">
+<td align="center">Second</td>
+<td>row</td>
+<td align="right">5.0</td>
+<td align="left">Here’s another one. Note
+the blank line between
+rows.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level4">
+<h4>链接</h4>
+<p>上文已有展示。</p>
+</div>
+</div>
+<div class="section level3">
+<h3>特色功能</h3>
+<p>在下一篇博客中展示。</p>
+<hr />
+<p><font color=#808080 size=2>
+更新说明：<br />
+2019-02-24：v0.1.0，创建。<br />
+2019-02-25：v1.0.0，发布。
+</font></p>
+</div>
+</div>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2019-02-08-rmarkdown-101/" data-toggle="tooltip" data-placement="top" title="R notebook 中 R 代码块含中文注释问题">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/r-markdown" title="R Markdown">
+                            R Markdown
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA" title="个人平台搭建">
+                            个人平台搭建
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://www.jianshu.com/u/e233eb0783de">木石的简书</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:xiaoguo.nano@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; GuoXiao&#39;s Blog , 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

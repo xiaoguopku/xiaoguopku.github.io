@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
-	<meta name="generator" content="Hugo 0.53" /><head>
+<head><head>
     <meta name="google-site-verification" content="9vIieCe-Qpd78QOmBl63rGtIVbhY6sYyuxX3j8XWBA4" />
     <meta name="baidu-site-verification" content="LRrmH41lz7" />
     <meta charset="utf-8">
@@ -9,14 +8,14 @@
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="">
+    <meta name="description" content="增加 foot_custom.html 文件，修改 footer.html 文件">
     
     <meta name="keyword"  content="GuoXiao, Blog, 博客, 个人网站, R, R Markdown">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>GuoXiao&#39;s Blog-GuoXiao&#39;s Blog</title>
+    <title>在基于 R blogdown 的网页中插入数学公式-GuoXiao&#39;s Blog</title>
 
-    <link rel="canonical" href="/">
+    <link rel="canonical" href="/post/2019-03-02-blogdown-101/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 	
@@ -129,14 +128,47 @@
 
 
 
-<header class="intro-header" style="background-image: url('/img/home-bg-sun-people.jpg')">
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-sun-people.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>GuoXiao&#39;s Blog </h1>
-                    
-		    <span class="subheading">Explore the Revolution in Productive Forces</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/r-markdown" title="R Markdown">
+                            R Markdown
+                        </a>
+                        
+                        <a class="tag" href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E4%B8%AA%E4%BA%BA%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA" title="个人平台搭建">
+                            个人平台搭建
+                        </a>
+                        
+                        <a class="tag" href="/tags/blogdown" title="Blogdown">
+                            Blogdown
+                        </a>
+                        
+                    </div>
+                    <h1>在基于 R blogdown 的网页中插入数学公式</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Xiao
+			 
+			on 
+			Saturday, March 2, 2019
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -145,168 +177,139 @@
 
 
 
-  
-<div class="container">
-    <div class="row">
-        
-        
-   	    <div class="
-            col-lg-8 col-lg-offset-1
-            col-md-8 col-md-offset-1
-            col-sm-12
-            col-xs-12
-            post-container
-        ">
-            
 
-<div class="post-preview">
-    <a href="/post/2019-01-19-dao-00/">
-        <h2 class="post-title">
-            栏目“道”的写作计划
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            写作计划的简要列表
-        
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Xiao Saturday, January 19, 2019
-    </p>
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+                
+
+
+<div class="section level2">
+<h2>动机</h2>
+<p>在 R Markdown 中插入数学公式是非常容易的，用美元符号将 LaTeX 公式包围即可。但要在网站中也显示出同样的结果，却需要额外的调整。这和网站的模板主题有关。如果你比较比较幸运，选择的主题中就直接支持数学公式，那么你用 R Markdown 语法写出的数学公式可以直接渲染出来，或者仅需在 <em>config.toml</em> 文件中，设置 <code>math=true</code> 即可。但是如果你选择的主题本身不支持数学公式，则需要修改主题。做法如下。</p>
 </div>
-<hr>
-
-<div class="post-preview">
-    <a href="/post/2019-01-19-blogdown-01/">
-        <h2 class="post-title">
-            给R用户的个人网站搭建教程
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            对R用户来说，数据分析报告的撰写是基本功之一。而可重复性分析报告（Reproducible reports）则是数据分析报告形式的最佳选择。……如何快速将R Markdown撰写的可重复性分析报告部署到个人网站中，是R用户搭建个人网站时必然需要思考的问题。
-        
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Xiao Saturday, January 19, 2019
-    </p>
+<div class="section level2">
+<h2>做法</h2>
+<ol style="list-style-type: decimal">
+<li>在路径 ./themes/your-theme-name/layouts/partials 下，增加一个 <em>foot_custom.html</em> 文件，内含如下代码：</li>
+</ol>
+<pre class="html"><code>&lt;script src=&quot;//yihui.name/js/math-code.js&quot;&gt;&lt;/script&gt;
+&lt;script async
+src=&quot;//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
+&lt;/script&gt;</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>在原有的 <em>footer.html</em> 文件中<code>&lt;footer&gt;</code>的下一行增加一行代码</li>
+</ol>
+<pre class="html"><code>{{ partial &quot;foot_custom.html&quot; . }}</code></pre>
 </div>
-<hr>
+<div class="section level2">
+<h2>原理与参考资料</h2>
+<ol style="list-style-type: decimal">
+<li><p><em>blogdown: Creating Websites with R Markdown</em> <a href="https://bookdown.org/yihui/blogdown/templates.html#how-to">2.5.2节</a> 与 <a href="https://bookdown.org/yihui/blogdown/website-basics.html">附录B</a>。</p></li>
+<li><p><a href="https://github.com/rstudio/blogdown/issues/36" class="uri">https://github.com/rstudio/blogdown/issues/36</a></p></li>
+</ol>
+<hr />
+<p><font color=#808080 size=2>
+更新说明：<br />
+2019-03-02：v1.0.0，创建并发布。<br />
+</font></p>
+</div>
 
 
-            
+                
 
-
-<ul class="pager">
-    
-    <li class="previous">
-        <a href="/">&larr; Newer Posts</a>
-    </li>
-    
-    
-</ul>
-
-
-       	</div>
-        
-
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-    
-    <section>
-        <hr class="hidden-sm hidden-xs">
-        <h5>FEATURED TAGS</h5>
-        <div class="tags">
-             
-            
-                
-                    <a href="/tags/blogdown" title="Blogdown">
-                        Blogdown
-                    </a>
-                
-            
-                
-            
-                
-                    <a href="/tags/r" title="R">
-                        R
-                    </a>
-                
-            
-                
-                    <a href="/tags/r-markdown" title="R Markdown">
-                        R Markdown
-                    </a>
-                
-            
-                
-            
-                
-                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA" title="个人平台搭建">
-                        个人平台搭建
-                    </a>
-                
-            
-                
-            
-                
-            
-        </div>
-    </section>
-    
-
-    
-    <section class="visible-md visible-lg">
-        <hr><h5><a href="">ABOUT ME</a></h5>
-        <div class="short-about">
-            
-            <img src="/img/me.jpg" />
-            
-            
-                <p>工业大数据领域，数据分析师</p>
-            
-           
-           <ul class="list-inline"> 
-               
-               
-               
-               
-               
-               
-               
-               
-               
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2019-02-24-rmarkdown-01/" data-toggle="tooltip" data-placement="top" title="R Markdown 学习指南与速查手册（1）">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
                 </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
             </div>
-    </section>
-    
-    
-    <section>
-        <hr class="hidden-sm hidden-xs">
-        <h5>FRIENDS</h5>
-        <ul class="list-inline">
             
-            <li><a target="_blank" href="https://www.jianshu.com/u/e233eb0783de">木石的简书</a></li>
-            
-        </ul>
-    </section>
-    
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-    
-    
-</div>
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/blogdown" title="Blogdown">
+                            Blogdown
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/r-markdown" title="R Markdown">
+                            R Markdown
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA" title="个人平台搭建">
+                            个人平台搭建
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
 
-	</div>
-</div>
-
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://www.jianshu.com/u/e233eb0783de">木石的简书</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
 
 
 

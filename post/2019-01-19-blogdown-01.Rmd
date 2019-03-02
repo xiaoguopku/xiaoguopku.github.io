@@ -12,6 +12,7 @@ showtoc: false
 categories: ["技"]
 tags:
     - R Markdown
+    - Blogdown
     - R
     - 个人平台搭建
 ---

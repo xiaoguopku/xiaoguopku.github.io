@@ -1,0 +1,49 @@
+---
+layout: post
+title: "在基于 R blogdown 的网页中插入数学公式"
+author: "Xiao"
+date: "2019-03-02"
+subtitle: ""
+description: "增加 foot_custom.html 文件，修改 footer.html 文件"
+excerpt: ""
+image: ""
+URL: ""
+showtoc: false
+categories: ["技"]
+tags: ["R Markdown", "R", "个人平台搭建", "Blogdown"]
+
+---
+
+## 动机
+
+在 R Markdown 中插入数学公式是非常容易的，用美元符号将 LaTeX 公式包围即可。但要在网站中也显示出同样的结果，却需要额外的调整。这和网站的模板主题有关。如果你比较比较幸运，选择的主题中就直接支持数学公式，那么你用 R Markdown 语法写出的数学公式可以直接渲染出来，或者仅需在 *config.toml* 文件中，设置 `math=true` 即可。但是如果你选择的主题本身不支持数学公式，则需要修改主题。做法如下。
+
+## 做法
+
+1. 在路径 ./themes/your-theme-name/layouts/partials 下，增加一个 *foot_custom.html* 文件，内含如下代码：
+
+```html
+<script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+```
+
+2. 在原有的 *footer.html* 文件中`<footer>`的下一行增加一行代码
+
+```html
+{{ partial "foot_custom.html" . }}
+```
+
+## 原理与参考资料
+  
+1. *blogdown: Creating Websites with R Markdown* [2.5.2节](https://bookdown.org/yihui/blogdown/templates.html#how-to) 与 [附录B](https://bookdown.org/yihui/blogdown/website-basics.html)。
+
+2. https://github.com/rstudio/blogdown/issues/36
+
+-----------------------------------------------------------------------------------
+
+<font color=#808080 size=2>
+更新说明：  
+2019-03-02：v1.0.0，创建并发布。  
+</font>

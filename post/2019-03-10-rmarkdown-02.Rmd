@@ -1,0 +1,222 @@
+---
+layout: post
+title: "R Markdown 学习指南与速查手册（2）"
+author: "Xiao"
+date: "2019-03-10"
+subtitle: "R Markdown 简介（下）"
+description: "由代码直接生成的图表、交互式表、交互式图、Shiny、Dashboards"
+excerpt: ""
+image: ""
+URL: ""
+showtoc: false
+categories: ["技"]
+tags: ["R Markdown", "R"]
+
+---
+
+这篇博客是上一篇博客《[R Markdown 学习指南与速查手册（1）：R Markdown 简介（上）](https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/)》的继续。我们在此介绍 R Markdown 相比于其他文档平台的特色功能。
+
+### 特色功能
+
+传统的写数据分析报告的流程是，用数据分析工具（Excel、SPSS 等）得到有意义的结果，将图片或表格保存到本地，然后再将本地的结果上传到文档平台（word、wps、有道笔记、印象笔记、普通博客网站、微信公众号等）中。一旦数据或分析过程发生变化，需要手动调整结果，费时费力且易出错。R Markdown 的数据分析结果直接由 R 代码生成，代码的变化会直接导致分析结果的变化，无需手动调整，这是 R Markdown 区别于其他文档处理平台的特殊之处。下面是一些具体的例子：
+
+#### 普通数据表
+
+```{r}
+library(knitr)
+kable(head(iris), align="c")
+```
+
+
+#### 普通数据图
+
+用以下代码绘制具有BBC风格的数据图。
+
+```{r message=FALSE, warning=FALSE}
+if(!require(pacman))install.packages("pacman")
+pacman::p_load('dplyr', 'tidyr', 'gapminder',
+               'ggplot2',  'ggalt',
+               'forcats', 'R.utils', 'png',
+               'grid', 'ggpubr', 'scales',
+               'bbplot')
+
+#Prepare data
+dumbbell_df <- gapminder %>%
+  filter(year == 1967 | year == 2007) %>%
+  select(country, year, lifeExp) %>%
+  spread(year, lifeExp) %>%
+  mutate(gap = `2007` - `1967`) %>%
+  arrange(desc(gap)) %>%
+  head(10)
+
+#Make plot
+ggplot(dumbbell_df, aes(x = `1967`, xend = `2007`, y = reorder(country, gap), group = country)) + 
+  geom_dumbbell(colour = "#dddddd",
+                size = 3,
+                colour_x = "#FAAB18",
+                colour_xend = "#1380A1") +
+  bbc_style() + 
+  labs(title="We're living longer",
+       subtitle="Biggest life expectancy rise, 1967-2007")
+```
+
+#### 交互式数据表
+
+在下面的交互式数据表中，你可以改变每页显示的行数，可以按某一列进行排序，可以在多页之间进行跳转，可以搜索表格中你想要的数据。
+
+```{r}
+library(DT)
+datatable(iris, options = list(pageLength = 5))
+```
+
+#### 交互式数据图
+
+##### 例1
+
+在下面的交互式数据图中，你可以通过鼠标拖动，改变数据的显示范围。
+
+```{r}
+library(dygraphs)
+dygraph(nhtemp, main = "New Haven Temperatures") %>% 
+  dyRangeSelector(dateWindow = c("1920-01-01", "1960-01-01"))
+```
+
+##### 例2
+
+在下面的交互式数据图中，你可以通过鼠标画框的方式，改变数据的显示范围。可以通过鼠标停靠，得到图中的数据具体值。
+
+```{r message=FALSE, warning=FALSE}
+library(plotly)
+p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
+  geom_bar(position = "dodge")
+ggplotly(p)
+```
+
+##### 例3 
+
+在下面的交互式数据图中，你可以拖拽网络图中节点的位置，可以通过鼠标滚轮放大和缩小视图。
+
+```{r message=FALSE, warning=FALSE}
+library(visNetwork)
+nodes <- data.frame(id = 1:6, title = paste("node", 1:6), 
+                    shape = c("dot", "square"),
+                    size = 10:15, color = c("blue", "red"))
+edges <- data.frame(from = 1:5, to = c(5, 4, 6, 3, 3))
+visNetwork(nodes, edges) %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE)
+```
+
+##### 例4
+
+在下面的交互式数据图中，你可以通过鼠标画框的方式，改变数据的显示范围。可以通过鼠标停靠，得到图中的数据具体值。
+
+```{r}
+library(d3heatmap)
+d3heatmap(mtcars, scale="column", colors="Blues")
+```
+
+##### 例5
+
+在下面的交互式数据图中，你可以通过鼠标拖动，从不同视角查看这个3维立体图。
+
+```{r message=FALSE, warning=FALSE}
+library(threejs)
+z <- seq(-10, 10, 0.1)
+x <- cos(z)
+y <- sin(z)
+scatterplot3js(x, y, z, color=rainbow(length(z)))
+```
+
+##### 例6
+
+在下面的交互式数据图中，你可以与动态地图交互。
+
+```{r}
+library(leaflet)
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+m
+```
+
+
+#### 动态数据图
+
+##### 例1
+
+将一系列数据图转化为gif，可以增加对数据的洞察，下面例子来自 https://blogdown-demo.rbind.io/2018/01/31/gif-animations/ 。注意需要提前安装 [FFmpeg](https://ffmpeg.zeranoe.com/builds/) 软件，安装方法见 https://zh.wikihow.com/%E5%9C%A8Windows%E4%B8%8A%E5%AE%89%E8%A3%85FFmpeg%E7%A8%8B%E5%BA%8F 
+
+````markdown
+`r '\x60\x60\x60{r fig.show=\'animate\', dev=\'jpeg\', ffmpeg.format=\'gif\'}
+for (i in 1:10) plot(runif(100), ylim = c(0, 1)) # for example
+\x60\x60\x60'`
+````
+
+```{r echo=FALSE, fig.show='animate', dev='jpeg', ffmpeg.format='gif'}
+for (i in 1:10) plot(runif(100), ylim = c(0, 1)) # for example
+```
+
+##### 例2
+
+下面的效果和最近一篇比较火的可视化文章 [*Who runs China?*](https://news.cgtn.com/event/2019/whorunschina/index.html?from=timeline&isappinstalled=0) 类似。
+
+```{r}
+library(datasauRus)
+library(ggplot2)
+library(gganimate)
+
+ggplot(datasaurus_dozen, aes(x=x, y=y))+
+  geom_point()+
+  theme_minimal() +
+  transition_states(dataset, 3, 1) + 
+  ease_aes('cubic-in-out')
+
+```
+
+
+#### 参数、数据可变图表（Shiny APP）
+
+用户与上面图表进行交互，只是图表的展示*形式*发生了改变，但图表本身的*内容*，即*数据*本身并不会改变。图表所展示的数据与源数据及后续建模处理的参数有关，如果调整这些参数，图表所展示的*内容*就会随之改变。Shiny 是 R 语言生成参数、数据可变图表的一个工具，下面展示了一个 Shiny APP，你可以调节下拉框的参数，改变直方图的数据。
+
+```{r}
+knitr::include_app("https://xiaoguodata.shinyapps.io/try_shiny/",height="520px")
+```
+
+显然，参数变化之后，新的数据需要重新计算，才能显示出来，这需要后台计算的支持。由于本网站是静态网页的架构，所以上面的 APP 不能独立嵌入在其中。我们之所以可以在这里展示，实际上是这样完成的：首先将 APP 部署在具备后台计算资源的网页 https://xiaoguodata.shinyapps.io/try_shiny/ 中，然后在本网页中引用该结果。
+
+上面APP的代码为：
+
+```r
+selectInput(
+  'breaks', label = 'Number of bins:',
+  choices = c(10, 20, 35, 50), selected = 20
+) 
+renderPlot({
+  par(mar = c(4, 4, .1, .5))
+  hist(
+    faithful$eruptions, as.numeric(input$breaks),
+    col = 'gray', border = 'white',
+    xlab = 'Duration (minutes)', main = ''
+  )
+})
+```
+#### 仪表板（Dashboards）
+
+暂时没有找到直接嵌入仪表板的方法，目前处理方法和上面一样，先将仪表板部署在其他网站中，然后引用。
+
+```{r, out.width = '80%'}
+knitr::include_app("https://beta.rstudioconnect.com/jjallaire/htmlwidgets-ggplotly-geoms/htmlwidgets-ggplotly-geoms.html#geom_point", height="1100px")
+```
+
+
+
+#### 多图表关联互动（Crosstalk）
+
+待研究。
+
+-----------------------------------------------------------------------------------
+
+<font color=#808080 size=2>
+    更新说明：  
+    2019-03-10：v1.0.0，创建并发布。  
+</font>

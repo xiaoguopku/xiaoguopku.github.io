@@ -1,0 +1,65 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="generator" content="R package animation 2.6">
+	<title>Demonstration of Brownian Motion</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/scianimator.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css">
+
+	<script src="js/jquery-1.4.4.min.js"></script>
+	<script src="js/jquery.scianimator.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/languages/r.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+	<div class="scianimator"><div id="bm_plot" style="display: inline-block;"></div></div>
+	<div class="scianimator" style="width: 480px; text-align: left"><pre><code class="r">## Random walk on the 2D plane: for each point (x, y), x =
+##   x + rnorm(1) and y = y + rnorm(1).
+library(animation)
+library(leaflet)
+library(threejs)
+library(igraph)
+library(d3heatmap)
+library(visNetwork)
+library(plotly)
+library(dygraphs)
+library(DT)
+library(bbplot)
+library(scales)
+library(ggpubr)
+library(magrittr)
+library(png)
+library(R.utils)
+library(R.oo)
+library(R.methodsS3)
+library(forcats)
+library(ggalt)
+library(ggplot2)
+library(gapminder)
+library(tidyr)
+library(dplyr)
+library(pacman)
+library(knitr)
+ani.options(interval = 0.05, nmax = 30)
+par(mar = c(3, 3, 2, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3, 
+    cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
+brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow", 
+    main = "Demonstration of Brownian Motion")
+## R version 3.5.2 (2018-12-20)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Other packages: animation 2.6, leaflet 2.0.2, threejs 0.3.1,
+## igraph 1.2.1, d3heatmap 0.6.1.2, visNetwork 2.0.4, plotly 4.8.0,
+## dygraphs 1.1.1.6, DT 0.5, bbplot 0.2, scales 1.0.0, ggpubr 0.2,
+## magrittr 1.5, png 0.1-7, R.utils 2.8.0, R.oo 1.22.0, R.methodsS3
+## 1.7.1, forcats 0.3.0, ggalt 0.4.0, ggplot2 3.1.0, gapminder 0.3.0,
+## tidyr 0.8.3, dplyr 0.8.0.1, pacman 0.5.0, knitr 1.20</code></pre></div>
+	<script src="js/bm_plot.js"></script>
+
+
+</body>
+</html>

@@ -6,10 +6,19 @@
     <description>Recent content in Posts on GuoXiao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R Markdown 学习指南与速查手册（2）</title>
+      <link>/post/2019-03-10-rmarkdown-02/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-03-10-rmarkdown-02/</guid>
+      <description>这篇博客是上一篇博客《R Markdown 学习指南与速查手册（1）：R Markdown 简介（上）》的继续。我们在此介绍 R Markdown 相比于其他文档平台的特色功能。 特色功能 传统的写数</description>
+    </item>
     
     <item>
       <title>在基于 R blogdown 的网页中插入数学公式</title>

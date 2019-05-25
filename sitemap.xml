@@ -23,11 +23,6 @@
   </url>
   
   <url>
-    <loc>/post/2019-01-26-wordcloud-01/</loc>
-    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/top/about/</loc>
     <lastmod>2019-01-19T00:00:00+00:00</lastmod>
   </url>
@@ -75,12 +70,6 @@
   </url>
   
   <url>
-    <loc>/tags/python/</loc>
-    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/r/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -118,12 +107,6 @@
   <url>
     <loc>/tags/%E4%B8%AA%E4%BA%BA%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2019-03-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
-    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

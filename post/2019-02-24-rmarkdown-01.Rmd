@@ -92,7 +92,7 @@ tags: ["R Markdown", "R"]
 
 <p style="text-align:justify;">这是分散对齐的段落，文字不到一行。</p>
 
-<p style="text-align:justify;">这是分散对齐的段落，文字超过一行。由于网址较长，它被分在了第2行，https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/ 。这样，第1行文字就不足一行了，它会左对齐而非散开对齐显示。读者可对比这一段和左对齐段落的区别。</p>
+<p style="text-align:justify;">这是分散对齐的段落，文字超过一行。由于网址较长，它被分在了第2行，https://xiaoguopku.github.io/post/2019-02-24-rmarkdown-01/ 。这样，第1行文字就不足一行了，它会分散对齐而非左对齐显示。读者可对比这一段和左对齐段落的区别。</p>
 
 <p style="text-align:justify;text-justify:distribute-all-lines;text-align-last:justify;">这是单行强制分散对齐。</p>
 
